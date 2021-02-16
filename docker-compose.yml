@@ -1,0 +1,44 @@
+version: "3.3"
+services:
+    redis:
+        image: redis
+        volumes:
+          - ./redisdata:/data
+        ports:
+          - "6379:6379"
+    postgres:
+      image: postgres:13
+      container_name: postgres
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_DB: test-node
+        POSTGRES_HOST_AUTH_METHOD: trust
+      ports:
+        - "1234:5432"
+      volumes:
+        - ./pgdata:/var/lib/postgresql/data
+
+    nodeserver:
+        build: ./node-server
+        ports:
+            - "5000:5000"
+        environment: 
+          DB_HOST: postgres
+          DB_NAME: test-node
+          DB_USER: postgres
+          DB_PORT: 5432
+          REDIS_PORT: 6379
+          REDIS_HOST: redis 
+        depends_on:
+          - postgres
+          - redis
+        volumes:
+          - ./node-server:/usr/src/app
+    nginx:
+        restart: always
+        build:
+            context: ./nginx
+        ports:
+            - "80:80"
+        depends_on: 
+            - nodeserver
