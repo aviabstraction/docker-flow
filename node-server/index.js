@@ -95,4 +95,4 @@ client.query('CREATE TABLE IF NOT EXISTS student(name: VARCHAR(100) NOT NULL)', 
 app.get('/', (req, res) => {
   res.send("Docker containerized nodejs, nginx and postgres app")
 })
-app.listen(5000, () => console.log('Server is up and running'))
+app.listen(5000, () => console.log('Server is upppppp and running'))
