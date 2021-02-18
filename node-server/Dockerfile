@@ -21,4 +21,4 @@ COPY . .
 EXPOSE 5000
 
 # the command that starts our app
-CMD ["pm2-runtime","--json","index.js"]
+CMD ["node","index.js"]
