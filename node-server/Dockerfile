@@ -8,14 +8,19 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # run npm install in our local machine
-RUN npm install
+RUN npm cache clean --force
 
-RUN npm install pm2 -g
+RUN npm ci
+
+# RUN npm install pm2 -g
 
 
 
 # copy the generated modules and all other files to the container
-COPY . .
+COPY . ./
+
+
+RUN ls -l
 
 # our app is running on port 5000 within the container, so need to expose it
 EXPOSE 5000

@@ -34,7 +34,8 @@ services:
           - postgres
           - redis
         volumes:
-          - ./node-server:/usr/src/app
+          - ./usr/src/app:/usr/src/app
+           - /usr/src/app/node_modules
     nginx:
         restart: always
         build:
