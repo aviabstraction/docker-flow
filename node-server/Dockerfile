@@ -13,6 +13,7 @@ RUN npm cache clean --force
 RUN npm ci
 
 # RUN npm install pm2 -g
+# Why pm2
 
 
 
